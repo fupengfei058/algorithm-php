@@ -26,7 +26,6 @@ function buildHeap(&$array,$i,$heapsize){
 
                 exchange($array[$i],$array[$max]);
                 buildHeap($array,$max,$heapsize);
-
         }
 }
 
