@@ -23,7 +23,6 @@ function buildHeap(&$array,$i,$heapsize){
                 $max = $right;
         }
         if($i != $max && $i < $heapsize && $max < $heapsize){
-
                 exchange($array[$i],$array[$max]);
                 buildHeap($array,$max,$heapsize);
         }
