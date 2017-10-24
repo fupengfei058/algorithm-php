@@ -15,11 +15,11 @@ function buildHeap(&$array,$i,$heapsize){
         $left = left($i);
         $right = right($i);
         $max = $i;
-        if($i < $heapsize && $left<$heapsize  && $array[$left] > $array[$i] ){
+        if($i < $heapsize && $left < $heapsize  && $array[$left] > $array[$i] ){
                 $max = $left;
         }
 
-        if($i < $heapsize && $right<$heapsize && $array[$right] > $array[$max]){
+        if($i < $heapsize && $right < $heapsize && $array[$right] > $array[$max]){
                 $max = $right;
         }
         if($i != $max && $i < $heapsize && $max < $heapsize){
