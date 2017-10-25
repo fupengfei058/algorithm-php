@@ -1,10 +1,10 @@
 <?php
 
 class Node{
-    public $key,$left,$right;
-    public function __construct($key)
+    public $value,$left,$right;
+    public function __construct($value)
     {
-        $this->key = $key;
+        $this->value = $value;
     }
 }
 
@@ -13,14 +13,14 @@ class BinaryTree{
     public $sortArr = [];
     // 插入节点
     public function insertNode($node,$newNode){
-        if ($node->key < $newNode->key){
+        if ($node->value < $newNode->value){
             // 如果父节点小于子节点,插到右边
             if (empty($node->right)){
                 $node->right = $newNode;
             }else{
                 $this->insertNode($node->right,$newNode);
             }
-        }elseif ($node->key > $newNode->key){
+        }elseif ($node->value > $newNode->value){
             // 如果父节点大于子节点,插到左边
             if (empty($node->left)){
                 $node->left = $newNode;
@@ -44,7 +44,7 @@ class BinaryTree{
     public function midSortNode($node){
         if (!empty($node)){
             $this->midSortNode($node->left);
-            array_push($this->sortArr,$node->key);
+            array_push($this->sortArr,$node->value);
             $this->midSortNode($node->right);
         }
     }
@@ -59,7 +59,7 @@ class BinaryTree{
         if (!empty($node->left)){
             $this->findMinNode($node->left);
         }else{
-            echo '这个二叉树的最小值为:'.$node->key;
+            echo '这个二叉树的最小值为:'.$node->value;
         }
     }
     public function findMax(){
@@ -71,7 +71,7 @@ class BinaryTree{
         if (!empty($node->right)){
             $this->findMaxNode($node->right);
         }else{
-            echo '这个二叉树的最大值为:'.$node->key;
+            echo '这个二叉树的最大值为:'.$node->value;
         }
     }
     // 查找特定的值
@@ -81,20 +81,20 @@ class BinaryTree{
         }
     }
     public function findNode(Node $node,$val){
-        if ($node->key == $val){
-            echo '找到'.$val.'了';
-        }else if ($node->key > $val){
+        if ($node->value == $val){
+            echo '找到'.$val;
+        }else if ($node->value > $val){
             // 如果 父节点的值 大于要查找的值,那么查找它的左子树
             if (!empty($node->left)){
                 $this->findNode($node->left,$val);
             }else{
-                echo '没有这个东西!';
+                echo '查无此数!';
             }
-        }else if ($node->key < $val){
+        }else if ($node->value < $val){
             if (!empty($node->right)){
                 $this->findNode($node->right,$val);
             }else{
-                echo '没有这个东西!';
+                echo '查无此数!';
             }
         }
     }
