@@ -48,9 +48,9 @@ class BinaryTree{
             $this->midSortNode($node->right);
         }
     }
-    // 寻找极值
+    // 查找极值
     public function findMin(){
-        //不断的找它的左子树,直到这个左子树的节点为叶子节点.
+        //不断的找它的左子树,直到这个左子树的节点为叶子节点
         if (!empty($this->root)){
             $this->findMinNode($this->root);
         }
@@ -84,7 +84,7 @@ class BinaryTree{
         if ($node->value == $val){
             echo '找到'.$val;
         }else if ($node->value > $val){
-            // 如果 父节点的值 大于要查找的值,那么查找它的左子树
+            // 如果父节点的值大于要查找的值,那么查找它的左子树
             if (!empty($node->left)){
                 $this->findNode($node->left,$val);
             }else{
