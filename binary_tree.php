@@ -52,50 +52,85 @@ class BinaryTree{
     public function findMin(){
         //不断的找它的左子树,直到这个左子树的节点为叶子节点
         if (!empty($this->root)){
-            $this->findMinNode($this->root);
+            return $this->findMinNode($this->root);
         }
     }
     public function findMinNode(Node $node){
         if (!empty($node->left)){
-            $this->findMinNode($node->left);
+            return $this->findMinNode($node->left);
         }else{
-            echo '这个二叉树的最小值为:'.$node->value;
+            return $node;
         }
     }
     public function findMax(){
         if (!empty($this->root)){
-            $this->findMaxNode($this->root);
+            return $this->findMaxNode($this->root);
         }
     }
     public function findMaxNode(Node $node){
         if (!empty($node->right)){
-            $this->findMaxNode($node->right);
+            return $this->findMaxNode($node->right);
         }else{
-            echo '这个二叉树的最大值为:'.$node->value;
+            return $node;
         }
     }
     // 查找特定的值
     public function find($val = ''){
         if (!empty($val)){
-            $this->findNode($this->root,$val);
+            return $this->findNode($this->root,$val);
         }
     }
     public function findNode(Node $node,$val){
         if ($node->value == $val){
-            echo '找到'.$val;
+            return $node;
         }else if ($node->value > $val){
             // 如果父节点的值大于要查找的值,那么查找它的左子树
             if (!empty($node->left)){
-                $this->findNode($node->left,$val);
+                return $this->findNode($node->left,$val);
             }else{
-                echo '查无此数!';
+                return false;
             }
         }else if ($node->value < $val){
             if (!empty($node->right)){
-                $this->findNode($node->right,$val);
+                return $this->findNode($node->right,$val);
             }else{
-                echo '查无此数!';
+                return false;
             }
+        }
+    }
+
+    //删除最小节点
+    public function deleteMin(Node $node){
+
+    }
+    //删除最大节点
+    public function deleteMax(Node $node){
+
+    }
+
+    // 删除节点
+    public function delete($val = ''){
+        if(!empty($val) && $node = $this->find($val)){
+            return $this->deleteNode($node, $val);
+        }
+    }
+    public function deleteNode(Node $node, $val){
+        //没有左右子节点
+        if(empty($node->left) && empty($node->right)){
+            $node = null;
+            return true;
+        }
+        //只有右子节点
+        if(empty($node->left) && !empty($node->right)){
+
+        }
+        //只有左子节点
+        if(!empty($node->left) && empty($node->right)){
+
+        }
+        //左右节点都存在
+        if(!empty($node->left) && !empty($node->right)){
+
         }
     }
 }
@@ -113,5 +148,6 @@ foreach ($nodes as $value){
 //$tree->findMin();
 //$tree->findMax();
 // 查找特定的值
-$tree->find(7);
-$tree->find(11);
+//echo '<pre>';
+//var_dump($tree->find(7));
+//$tree->find(11);
