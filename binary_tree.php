@@ -167,7 +167,7 @@ class BinaryTree{
                     $rightMinNode = $this->findMinNode($node->right);
                     $this->deleteMinNode($node->right);
                     $node->parent->left = $rightMinNode;
-                    $rightMinNode->left = $node->left;
+//                    $rightMinNode->left = $node->left;
                     $rightMinNode->right = $node->right;
                 }
             }else{
@@ -178,7 +178,7 @@ class BinaryTree{
                     $this->deleteMaxNode($node->left);
                     $node->parent->right = $leftMaxNode;
                     $leftMaxNode->left = $node->left;
-                    $leftMaxNode->right = $node->right;
+//                    $leftMaxNode->right = $node->right;
                 }
             }
         }
@@ -215,7 +215,7 @@ echo '<pre>';
 //$tree->find(11);
 
 // 删除特定的值
-$tree->delete(6);
+//$tree->delete(13);
 
 // 中序遍历
 $tree->midSort();
