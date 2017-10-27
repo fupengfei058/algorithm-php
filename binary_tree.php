@@ -1,7 +1,7 @@
 <?php
 
 class Node{
-    public $value,$left,$right;
+    public $value,$left,$right,$parent;
     public function __construct($value)
     {
         $this->value = $value;
@@ -17,6 +17,7 @@ class BinaryTree{
             // 如果父节点小于子节点,插到右边
             if (empty($node->right)){
                 $node->right = $newNode;
+                $newNode->parent = $node;
             }else{
                 $this->insertNode($node->right,$newNode);
             }
@@ -24,6 +25,7 @@ class BinaryTree{
             // 如果父节点大于子节点,插到左边
             if (empty($node->left)){
                 $node->left = $newNode;
+                $newNode->parent = $node;
             }else{
                 $this->insertNode($node->left,$newNode);
             }
@@ -100,37 +102,85 @@ class BinaryTree{
     }
 
     //删除最小节点
-    public function deleteMin(Node $node){
-
+    public function deleteMin(){
+        $this->findMinNode($this->root);
     }
-    //删除最大节点
-    public function deleteMax(Node $node){
-
-    }
-
-    // 删除节点
-    public function delete($val = ''){
-        if(!empty($val) && $node = $this->find($val)){
-            return $this->deleteNode($node, $val);
+    public function deleteMinNode(Node $node){
+        $minNode = $this->findMinNode($node);
+        if(empty($minNode->right)){
+            $minNode->parent->left = null;
+        }else{
+            $minNode->parent->left = $minNode->right;
         }
     }
-    public function deleteNode(Node $node, $val){
+    //删除最大节点
+    public function deleteMax(){
+        $this->findMaxNode($this->root);
+    }
+    public function deleteMaxNode(Node $node){
+        $maxNode = $this->findMaxNode($node);
+        if(empty($maxNode->left)){
+            $maxNode->parent->right = null;
+        }else{
+            $maxNode->parent->right = $maxNode->left;
+        }
+    }
+
+    // 删除指定节点
+    public function delete($val = ''){
+        if(!empty($val) && $node = $this->find($val)){
+            $this->deleteNode($node);
+        }
+    }
+    public function deleteNode(Node $node){
         //没有左右子节点
         if(empty($node->left) && empty($node->right)){
-            $node = null;
-            return true;
+            if($this->isLeft($node)){
+                $node->parent->left = null;
+            }else{
+                $node->parent->right = null;
+            }
         }
         //只有右子节点
         if(empty($node->left) && !empty($node->right)){
-
+            if($this->isLeft($node)){
+                $node->parent->left = $node->right;
+            }else{
+                $node->parent->right = $node->right;
+            }
         }
         //只有左子节点
         if(!empty($node->left) && empty($node->right)){
-
+            if($this->isLeft($node)){
+                $node->parent->left = $node->left;
+            }else{
+                $node->parent->right = $node->left;
+            }
         }
         //左右节点都存在
         if(!empty($node->left) && !empty($node->right)){
+            if($this->isLeft($node)){
+                $rightMinNode = $this->findMinNode($node->right);
+                $this->deleteMinNode($node->right);
+                $node->parent->left = $rightMinNode;
+                $rightMinNode->left = $node->left;
+                $rightMinNode->right = $node->right;
+            }else{
+                $leftMaxNode = $this->findMaxNode($node->left);
+                $this->deleteMaxNode($node->left);
+                $node->parent->right = $leftMaxNode;
+                $leftMaxNode->left = $node->left;
+                $leftMaxNode->right = $node->right;
+            }
+        }
+    }
 
+    //判断某节点是否父节点的左子节点
+    public function isLeft(Node $node){
+        if($node->parent->left->value == $node->value){
+            return true;
+        }else{
+            return false;
         }
     }
 }
@@ -141,13 +191,22 @@ $nodes = array(8,3,10,1,6,14,4,7,13);
 foreach ($nodes as $value){
     $tree->insert($value);
 }
-// 中序遍历
-//$tree->midSort();
-//print_r($tree->sortArr);
+echo '<pre>';
 // 寻找极值
 //$tree->findMin();
 //$tree->findMax();
+
+// 删除极值
+//$tree->deleteMin();
+//$tree->deleteMax();
+
 // 查找特定的值
-//echo '<pre>';
 //var_dump($tree->find(7));
 //$tree->find(11);
+
+// 删除特定的值
+$tree->delete(6);
+
+// 中序遍历
+$tree->midSort();
+print_r($tree->sortArr);
