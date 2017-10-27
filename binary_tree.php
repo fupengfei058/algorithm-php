@@ -160,17 +160,26 @@ class BinaryTree{
         //左右节点都存在
         if(!empty($node->left) && !empty($node->right)){
             if($this->isLeft($node)){
-                $rightMinNode = $this->findMinNode($node->right);
-                $this->deleteMinNode($node->right);
-                $node->parent->left = $rightMinNode;
-                $rightMinNode->left = $node->left;
-                $rightMinNode->right = $node->right;
+                if(empty($node->left->left) && empty($node->left->right)){
+                    //该节点的子节点为叶子结点
+                    $node->parent->left = $node->left;
+                }else{
+                    $rightMinNode = $this->findMinNode($node->right);
+                    $this->deleteMinNode($node->right);
+                    $node->parent->left = $rightMinNode;
+                    $rightMinNode->left = $node->left;
+                    $rightMinNode->right = $node->right;
+                }
             }else{
-                $leftMaxNode = $this->findMaxNode($node->left);
-                $this->deleteMaxNode($node->left);
-                $node->parent->right = $leftMaxNode;
-                $leftMaxNode->left = $node->left;
-                $leftMaxNode->right = $node->right;
+                if(empty($node->right->left) && empty($node->right->right)){
+                    $node->parent->right = $node->right;
+                }else{
+                    $leftMaxNode = $this->findMaxNode($node->left);
+                    $this->deleteMaxNode($node->left);
+                    $node->parent->right = $leftMaxNode;
+                    $leftMaxNode->left = $node->left;
+                    $leftMaxNode->right = $node->right;
+                }
             }
         }
     }
@@ -183,6 +192,7 @@ class BinaryTree{
             return false;
         }
     }
+
 }
 
 $tree = new BinaryTree();
