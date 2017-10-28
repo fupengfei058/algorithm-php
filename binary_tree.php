@@ -102,87 +102,87 @@ class BinaryTree{
     }
 
     //删除最小节点
-    public function deleteMin(){
-        $this->findMinNode($this->root);
-    }
-    public function deleteMinNode(Node $node){
-        $minNode = $this->findMinNode($node);
-        if(empty($minNode->right)){
-            $minNode->parent->left = null;
-        }else{
-            $minNode->parent->left = $minNode->right;
-        }
-    }
-    //删除最大节点
-    public function deleteMax(){
-        $this->findMaxNode($this->root);
-    }
-    public function deleteMaxNode(Node $node){
-        $maxNode = $this->findMaxNode($node);
-        if(empty($maxNode->left)){
-            $maxNode->parent->right = null;
-        }else{
-            $maxNode->parent->right = $maxNode->left;
-        }
-    }
-
-    // 删除指定节点
-    public function delete($val = ''){
-        if(!empty($val) && $node = $this->find($val)){
-            $this->deleteNode($node);
-        }
-    }
-    public function deleteNode(Node $node){
-        //没有左右子节点
-        if(empty($node->left) && empty($node->right)){
-            if($this->isLeft($node)){
-                $node->parent->left = null;
-            }else{
-                $node->parent->right = null;
-            }
-        }
-        //只有右子节点
-        if(empty($node->left) && !empty($node->right)){
-            if($this->isLeft($node)){
-                $node->parent->left = $node->right;
-            }else{
-                $node->parent->right = $node->right;
-            }
-        }
-        //只有左子节点
-        if(!empty($node->left) && empty($node->right)){
-            if($this->isLeft($node)){
-                $node->parent->left = $node->left;
-            }else{
-                $node->parent->right = $node->left;
-            }
-        }
-        //左右节点都存在
-        if(!empty($node->left) && !empty($node->right)){
-            if($this->isLeft($node)){
-                if(empty($node->left->left) && empty($node->left->right)){
-                    //该节点的子节点为叶子结点
-                    $node->parent->left = $node->left;
-                }else{
-                    $rightMinNode = $this->findMinNode($node->right);
-                    $this->deleteMinNode($node->right);
-                    $node->parent->left = $rightMinNode;
-//                    $rightMinNode->left = $node->left;
-                    $rightMinNode->right = $node->right;
-                }
-            }else{
-                if(empty($node->right->left) && empty($node->right->right)){
-                    $node->parent->right = $node->right;
-                }else{
-                    $leftMaxNode = $this->findMaxNode($node->left);
-                    $this->deleteMaxNode($node->left);
-                    $node->parent->right = $leftMaxNode;
-                    $leftMaxNode->left = $node->left;
-//                    $leftMaxNode->right = $node->right;
-                }
-            }
-        }
-    }
+//    public function deleteMin(){
+//        $this->findMinNode($this->root);
+//    }
+//    public function deleteMinNode(Node $node){
+//        $minNode = $this->findMinNode($node);
+//        if(empty($minNode->right)){
+//            $minNode->parent->left = null;
+//        }else{
+//            $minNode->parent->left = $minNode->right;
+//        }
+//    }
+//    //删除最大节点
+//    public function deleteMax(){
+//        $this->findMaxNode($this->root);
+//    }
+//    public function deleteMaxNode(Node $node){
+//        $maxNode = $this->findMaxNode($node);
+//        if(empty($maxNode->left)){
+//            $maxNode->parent->right = null;
+//        }else{
+//            $maxNode->parent->right = $maxNode->left;
+//        }
+//    }
+//
+//    // 删除指定节点
+//    public function delete($val = ''){
+//        if(!empty($val) && $node = $this->find($val)){
+//            $this->deleteNode($node);
+//        }
+//    }
+//    public function deleteNode(Node $node){
+//        //没有左右子节点
+//        if(empty($node->left) && empty($node->right)){
+//            if($this->isLeft($node)){
+//                $node->parent->left = null;
+//            }else{
+//                $node->parent->right = null;
+//            }
+//        }
+//        //只有右子节点
+//        if(empty($node->left) && !empty($node->right)){
+//            if($this->isLeft($node)){
+//                $node->parent->left = $node->right;
+//            }else{
+//                $node->parent->right = $node->right;
+//            }
+//        }
+//        //只有左子节点
+//        if(!empty($node->left) && empty($node->right)){
+//            if($this->isLeft($node)){
+//                $node->parent->left = $node->left;
+//            }else{
+//                $node->parent->right = $node->left;
+//            }
+//        }
+//        //左右节点都存在
+//        if(!empty($node->left) && !empty($node->right)){
+//            if($this->isLeft($node)){
+//                if(empty($node->left->left) && empty($node->left->right)){
+//                    //该节点的子节点为叶子结点
+//                    $node->parent->left = $node->left;
+//                }else{
+//                    $rightMinNode = $this->findMinNode($node->right);
+//                    $this->deleteMinNode($node->right);
+//                    $node->parent->left = $rightMinNode;
+////                    $rightMinNode->left = $node->left;
+//                    $rightMinNode->right = $node->right;
+//                }
+//            }else{
+//                if(empty($node->right->left) && empty($node->right->right)){
+//                    $node->parent->right = $node->right;
+//                }else{
+//                    $leftMaxNode = $this->findMaxNode($node->left);
+//                    $this->deleteMaxNode($node->left);
+//                    $node->parent->right = $leftMaxNode;
+//                    $leftMaxNode->left = $node->left;
+////                    $leftMaxNode->right = $node->right;
+//                }
+//            }
+//        }
+//    }
 
     //判断某节点是否父节点的左子节点
     public function isLeft(Node $node){
