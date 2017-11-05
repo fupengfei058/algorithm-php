@@ -35,3 +35,4 @@ http://blog.phpha.com/backup/archives/1683.html
 #### 字符串匹配算法-sunday算法（[sunday.php](https://github.com/fupengfei058/algorithm/blob/master/sunday.php)）
 #### 二叉树（[binary_tree.php](https://github.com/fupengfei058/algorithm/blob/master/binary_tree.php)）
 #### 红黑树（[red_black_tree.php](https://github.com/fupengfei058/algorithm/blob/master/red_black_tree.php)）
+#### 字典树（[trie.php](https://github.com/fupengfei058/algorithm/blob/master/trie.php)）
