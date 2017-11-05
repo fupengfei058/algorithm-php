@@ -67,6 +67,9 @@ class RedBlackTree
 
     // 插入节点
     public function put($key, $value){
+        if(empty($this->root)){
+            $this->root = new Node($key, $value, self::BLACK);
+        }
         $this->root = $this->putNode($this->root, $key, $value);
         $this->root->color = self::BLACK;
     }
@@ -97,3 +100,12 @@ class RedBlackTree
         return $node;
     }
 }
+
+$tree = new RedBlackTree();
+// 节点插入
+$nodes = array(8,3,10,1,6,14,4,7,13);
+foreach ($nodes as $key => $val){
+    $tree->put($key, $val);
+}
+//echo '<pre>';
+var_dump($tree);
