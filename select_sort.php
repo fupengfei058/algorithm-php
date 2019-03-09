@@ -3,20 +3,19 @@
 function select_sort($arr){
     $len = count($arr);
     for($i = 0;$i < $len - 1;$i++){
-        //假设最小值为$i
-        $min_val = $arr[$i];
         //最小值的下标
         $min_index = $i;
         for($j = $i + 1;$j < $len;$j++){
             //不是最小值
-            if($min_val > $arr[$j]){
-                $min_val = $arr[$j];
+            if($arr[$min_val] > $arr[$j]){
                 $min_index = $j;
             }
         }
-        $temp = $arr[$i];
-        $arr[$i] = $arr[$min_index];
-        $arr[$min_index] = $temp;
+        if($min_index != $i){
+            $temp = $arr[$i];
+            $arr[$i] = $arr[$min_index];
+            $arr[$min_index] = $temp;
+        }
     }
     return $arr;
 }
